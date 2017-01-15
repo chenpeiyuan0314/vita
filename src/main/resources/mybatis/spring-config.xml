@@ -19,7 +19,7 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
   <!-- 引入属性文件 -->
-  <context:property-placeholder location="classpath:/config.properties" />
+  <context:property-placeholder location="classpath:mybatis/jdbc.properties" />
   
   <!-- 数据源 -->
   <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -33,7 +33,7 @@
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-    <property name="mapperLocations" value="classpath:/mapping/*.xml" />
+    <property name="mapperLocations" value="classpath:mapping/*.xml" />
     <!-- 
     <property name="plugins">
       <bean class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor"> 
@@ -45,7 +45,8 @@
   
   <!-- 接口类扫描 -->
   <bean name="mapperScannerConfigurer"  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="org.yuan.project.platform.mapper" />
+    <property name="basePackage" value="org.yuan.vita.mybatis.mapper" />
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
   </bean>
   
   <!-- 配置事务管理器 -->
@@ -56,19 +57,13 @@
   <!-- 注解方式配置事务 -->
   <tx:annotation-driven transaction-manager="transactionManager" />
 
-  <!-- 扫描持久层 -->
-  <context:component-scan base-package="org.yuan.project.platform.manager" />
-  
-  <bean class="org.yuan.project.platform.helper.CheckHelper">
-    <property name="clientManager" ref="clientManager"/>
-  </bean>
-  
-  <bean class="org.yuan.project.platform.helper.CheckHelper">
-    <property name="clientManager" ref="clientManager"/>
-  </bean>
-  
-  <!-- 扫描控制层 -->
-  <context:component-scan base-package="org.yuan.project.platform.controller" />
+  <!-- 扫描持久层 
+  <context:component-scan base-package="org.yuan.vita.mybatis.manager" />
+ -->
+
+  <!-- 扫描控制层 
+  <context:component-scan base-package="org.yuan.vita.mybatis.controller" />
+-->
 
   <!-- JspViewResolver -->
   <bean id="jspViewResolver"
@@ -100,5 +95,9 @@
     <bean class="org.yuan.project.platform.other.LogInterceptor"/>  
   </mvc:interceptors>
   -->
-  
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="o" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
+    </bean>  
 </beans>

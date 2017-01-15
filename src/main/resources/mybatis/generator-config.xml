@@ -46,7 +46,7 @@
     </javaClientGenerator>
     
     <!-- 数据表配置 -->
-    <table tableName="TEST" 
+    <table tableName="test" domainObjectName="Test"
       enableCountByExample="false" enableSelectByExample="false" 
       enableUpdateByExample="false" enableDeleteByExample="false">
     </table>
