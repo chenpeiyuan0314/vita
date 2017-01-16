@@ -57,9 +57,8 @@
   <!-- 注解方式配置事务 -->
   <tx:annotation-driven transaction-manager="transactionManager" />
 
-  <!-- 扫描持久层 
-  <context:component-scan base-package="org.yuan.vita.mybatis.manager" />
- -->
+  <!-- 扫描持久层 -->
+  <context:component-scan base-package="org.yuan.vita.mybatis.manage" />
 
   <!-- 扫描控制层 
   <context:component-scan base-package="org.yuan.vita.mybatis.controller" />
