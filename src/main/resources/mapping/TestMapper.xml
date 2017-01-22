@@ -68,10 +68,4 @@
       date = #{date,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-  <!-- 获取记录总数 -->
-  <select id="selectTotalCount" resultType="java.lang.Integer">
-    SELECT COUNT(1) 
-    FROM test
-  </select>
 </mapper>
