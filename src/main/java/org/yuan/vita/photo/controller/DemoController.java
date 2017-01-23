@@ -41,9 +41,13 @@ public class DemoController {
    */
   @ResponseBody
   @RequestMapping("upload")
-  public Map<String,Object> upload(@RequestParam("file") MultipartFile file) {
+  public Map<String,Object> upload(@RequestParam("file") MultipartFile file) throws Exception {
     Map<String,Object> data = new HashMap<String,Object>();
-    data.put("result", "");
+    //data.put("getBytes()", file.getBytes());
+    data.put("getContentType()", file.getContentType());
+    data.put("getName()", file.getName());
+    data.put("getOriginalFilename()", file.getOriginalFilename());
+    data.put("getSize()", file.getSize());
     return data;
   }
 
